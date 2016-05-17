@@ -23,7 +23,7 @@
      </platform>
 
      <platform name="ios">    
-          <source-file src="libFlurryDFPAdapter_5.4.0.r1.a" framework="true"/>
+          <source-file src="libFlurryDFPAdapter_6.0.0.r1.a" framework="true"/>
 	</platform>
 
 </plugin>
