@@ -1,29 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	id="cordova-plugin-admob-mmedia"
-	version="1.6.3">
-      
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-admob-mmedia"
+        version="1.6.3">
+
     <name>AdMob Mediation Adapter for Millennial Media</name>
-	<description>AdMob Mediation Adapter for Millennial Media</description>
-	<keywords>admob,mmedia,mediation</keywords>
+    <description>AdMob Mediation Adapter for Millennial Media</description>
+    <keywords>admob,mmedia,mediation</keywords>
     <repo>https://github.com/floatinghotpot/cordova-admob-pro.git</repo>
     <issue>https://github.com/floatinghotpot/cordova-admob-pro/issues</issue>
 
-	<engines>
-	    <engine name="cordova" version=">=3.5" />
-	</engines>
+    <engines>
+        <engine name="cordova" version=">=3.5"/>
+    </engines>
 
-    <!-- dependency id="cordova-plugin-admobpro"/ -->
-    <dependency id="cordova-plugin-mmedia"/>
-    
     <platform name="android">
-        <source-file src="MMAdMobAdapter_1_6_0.jar" target-dir="libs" />
-     </platform>
+	    <framework src="src/android/admob-mmedia.gradle" custom="true" type="gradleReference" />
+        <resource-file src="src/android/mm-ad-sdk.aar" target="aar/mm-ad-sdk.aar"/>
+        <resource-file src="src/android/android-admob-mm-adapter.aar" target="aar/android-admob-mm-adapter.aar"/>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity android:name="com.millennialmedia.android.MMActivity"
+			    android:theme="@android:style/Theme.Translucent.NoTitleBar" 
+			    android:configChanges="keyboardHidden|orientation|keyboard"></activity>
+          </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.RECORD_AUDIO" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.WRITE_CALENDAR" />
+			<uses-permission android:name="android.permission.NFC" />
+			<uses-permission android:name="android.permission.BLUETOOTH" />
+			<uses-permission android:name="android.permission.VIBRATE" />
+			<uses-feature android:name="android.hardware.microphone" android:required="false" />
+          </config-file>
+    </platform>
 
-     <platform name="ios">    
-          <source-file src="libAdapterMillennial.a" framework="true"/>
-	</platform>
+    <platform name="ios">
+        <source-file src="src/ios/libGoogleAdMMAdapter.a" framework="true"/>
+        <framework src="src/ios/MMAdSDK.framework" custom="true"/>
+        <framework src="AdSupport.framework"/>
+        <framework src="AudioToolbox.framework"/>
+        <framework src="AVFoundation.framework"/>
+        <framework src="CoreGraphics.framework"/>
+        <framework src="CoreLocation.framework"/>
+        <framework src="CoreMedia.framework"/>
+        <framework src="CoreTelephony.framework"/>
+        <framework src="EventKit.framework"/>
+        <framework src="EventKitUI.framework"/>
+        <framework src="Foundation.framework"/>
+        <framework src="libxml2.dylib"/>
+        <framework src="MediaPlayer.framework"/>
+        <framework src="MessageUI.framework"/>
+        <framework src="StoreKit.framework"/>
+        <framework src="SystemConfiguration.framework"/>
+        <framework src="UIKit.framework"/>
+    </platform>
 
 </plugin>

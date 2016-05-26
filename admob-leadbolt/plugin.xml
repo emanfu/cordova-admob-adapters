@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-admob-leadbolt"
+        version="1.0.0">
+
+    <name>AdMob Mediation Adapter for Leadbolt</name>
+    <description>AdMob Mediation Adapter for Leadbolt</description>
+    <keywords>admob,leadbolt,mediation</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=3.5"/>
+    </engines>
+
+    <platform name="android">
+        <source-file src="AppTracker.jar" target-dir="libs"/>
+        <source-file src="AdMobAppTracker.jar" target-dir="libs"/>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                      android:name="com.apptracker.android.module.AppModuleActivity"
+                      android:hardwareAccelerated="false">
+            </activity>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        </config-file>
+    </platform>
+
+    <platform name="ios">
+        <source-file src="libAdapterAppTracker.a" framework="true"/>
+        <framework src="AppTracker.framework" custom="true"/>
+        <framework src="AdSupport.framework"/>
+        <framework src="AVFoundation.framework"/>
+        <framework src="CoreMedia.framework"/>
+        <framework src="CoreTelephony.framework"/>
+        <framework src="StoreKit.framework"/>
+        <framework src="SystemConfiguration.framework"/>
+        <framework src="libz.tbd"/>
+    </platform>
+</plugin>
